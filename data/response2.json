@@ -1,0 +1,16 @@
+{
+  "validateMessagesShowId": "_validatorMessage",
+  "status": true,
+  "httpstatus": 200,
+  "data": {
+    "9": "20895",
+    "OT": [],
+    "WZ": "¥661.5",
+    "M": "¥1114.5",
+    "A9": "¥2089.5",
+    "O": "¥661.5",
+    "train_no": "5l000G132121"
+  },
+  "messages": [],
+  "validateMessages": {}
+}

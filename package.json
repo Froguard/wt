@@ -1,0 +1,29 @@
+{
+  "name": "watch12306",
+  "author": "Froguard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "bin": {
+    "watch12306": "./bin/bin.js"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "supervisor --harmony -w targets/*.json index.js"
+  },
+  "keywords": [
+    "12306",
+    "火车票"
+  ],
+  "dependencies": {
+    "co": "^4.6.0",
+    "columnify": "^1.5.4",
+    "minimist": "^1.2.0",
+    "node-notifier": "^4.6.1",
+    "request": "2.79.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  },
+  "license": "ISC"
+}
