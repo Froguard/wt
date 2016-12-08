@@ -5,6 +5,7 @@ const fileExistSync = fs.existsSync || path.existsSync;
 const Type = require('./lib/util/typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
 const STATIONS = require('./lib/station');
 const Watcher = require('./lib/watcher');
+const gaze = require('gaze');
 
 /**
  * 通过中文站名获取到对应key
@@ -81,15 +82,24 @@ let WTS = {};
 /**
  * 开始监视工作
  * @param configs
+ * @param dir
  */
-function watch(configs){
+function watch(configs,dir){
     if(configs.length==0){
         console.log("启动失败！");
         return;
     }
+    console.log("");
     configs.forEach((it)=>{
         WTS[it.name] = new Watcher(it);
         WTS[it.name].start();
+    });
+    gaze(path.join(dir,"*.json"),null, function(err,watcher){
+        this.on('all', function(event, filepath) {
+            let target = path.basename(filepath);
+            // console.log(`${target} is ${event}`);
+            WTS[target].restart();
+        });
     });
 
 }
@@ -98,6 +108,7 @@ function watch(configs){
 
 module.exports = {
     start: (dir) => {
-        watch(getConfigs(dir));
+        dir = dir||"./targets";
+        watch(getConfigs(dir),dir);
     }
 };
