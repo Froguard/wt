@@ -67,7 +67,7 @@ function getConfigs(dir){
         let curPath = path.join(dir,item);
         let stat = fs.statSync(curPath);
         if(stat.isFile() && curPath.match(/(\.json[3,5]?)$/)){
-            console.log(`Watch-json: ${colors.gray(curPath.replace("\\","/"))}`);
+            console.log(`Watch-json: ${colors.gray(curPath.replace(/\\/g,"/"))}`);
             try{
                 let config = JSON.parse(fs.readFileSync(curPath), 'utf8');
                 config.name = path.basename(curPath);
@@ -111,7 +111,7 @@ function watch(configs,dir){
 module.exports = {
     start: (dir) => {
         dir = dir||"./targets";
-        console.log(`Watch-dir: ${colors.gray(dir.replace("\\","/"))}`);
+        console.log(`Watch-dir: ${colors.gray(dir.replace(/\\/g,"/"))}`);
         watch(getConfigs(dir),dir);
     }
 };

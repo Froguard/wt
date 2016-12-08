@@ -2,13 +2,19 @@
 
 ## usage
 
-1. install
+### 0. download
+
+```bash
+$ git clone git@github.com:Froguard/wt.git
+```
+
+### 1. install
 
 ```bash
 $ npm link
 ```
 
-2. create ```./targets/target1.json``` (or u can create more than one json file)
+### 2. create ```./targets/target1.json``` (or u can create more than one json file)
 
 ```json
 {
@@ -22,18 +28,18 @@ $ npm link
 }
 ```
 
-3. start
+### 3. start
 
 ```bash
 $ watch12306 ./targets
 ```
 
-4. result
+### 4. result
 
 > in cli
 
-![cmd](https://raw.githubusercontent.com/Froguard/wt/master/data/demo.png)
+![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/demo.png)
 
 > in desktop
 
-![cmd](https://raw.githubusercontent.com/Froguard/wt/master/data/tip.png)
+![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/tip.png)
