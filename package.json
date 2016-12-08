@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "supervisor --harmony -w targets/*.json index.js"
+    "start": "node --harmony index.js"
   },
   "keywords": [
     "12306",
