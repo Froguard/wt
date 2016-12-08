@@ -31,7 +31,11 @@ $ npm link
 ### 3. start
 
 ```bash
-$ watch12306 ./targets
+$ watch12306
+```
+or
+```bash
+$ watch12306 %another_directory_path_u_ve_created%
 ```
 
 ### 4. result
