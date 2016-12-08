@@ -1,22 +1,27 @@
 # watch12306
 
-## usage
+- 自动监视12306，当有的时候在桌面进行通知
+- 可同时监视多个目标，一个json文件对应一个目标
+- 配置文件为中文，简单易懂
+- 仅仅是 ```监视```+```通知```的功能，不能使用它订票
 
-### 0. download
+## 使用
+
+### 0. 下载
 
 ```bash
 $ git clone git@github.com:Froguard/wt.git
 ```
 
-### 1. install
+### 1. 安装
 
 ```bash
 $ npm link
 ```
 
-### 2. create config file 
+### 2. 创建配置文件 
 
-create ```./targets/target1.json``` (or u can create more than one json file)
+如 ```./targets/target1.json``` （可以创建多个json文件）
 
 ```json
 {
@@ -30,7 +35,8 @@ create ```./targets/target1.json``` (or u can create more than one json file)
 }
 ```
 
-### 3. start
+### 3. 开启
+开启后放一边即可，当有票的时候，可以在桌面上通知
 
 ```bash
 $ watch12306
@@ -40,12 +46,12 @@ or
 $ watch12306 %another_directory_path_u_ve_created%
 ```
 
-### 4. result
+### 4. 效果
 
-> in command line
+> 控制台
 
 ![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/demo.png)
 
-> in desktop
+> 桌面
 
 ![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/tip.png)
