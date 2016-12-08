@@ -33,7 +33,14 @@ function cvtConfig(config){
             showPrice: !!config['显示票价'],
             onlyShowHighSpeedRail: !!config['仅显示高铁']
         },
-        pollinterval: (parseInt(config["监控频率(分钟)"]) || 3) * 60 * 1000
+        pollinterval: (parseInt(config["监控频率(分钟)"]) || 3) * 60 * 1000,
+        info:{
+            from: config["出发站"],
+            to: config["到达站"],
+            date: config['出发时间'],
+            purposeCode: config['成人票'] ? '成人票' : '学生票',
+            onlyShowHighSpeedRail: config['仅显示高铁']?"高铁":"普通"
+        }
     };
 }
 
