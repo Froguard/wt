@@ -6,6 +6,7 @@ const Type = require('./lib/util/typeOf');//这里不适用node-util检查，因
 const STATIONS = require('./lib/station');
 const Watcher = require('./lib/watcher');
 const gaze = require('gaze');
+const colors = require('./lib/util/colorful');
 
 /**
  * 通过中文站名获取到对应key
@@ -26,6 +27,8 @@ function getKeyByStationName(name){
  */
 function cvtConfig(config){
     config = config || {};
+    let pollInt = parseInt(config["监控频率(分钟)"]) || 0;
+    pollInt = pollInt < 1 ? 1 : pollInt;
     return {
         name: config.name || "未命名",
         from: getKeyByStationName(config['出发站']),
@@ -36,7 +39,7 @@ function cvtConfig(config){
             showPrice: !!config['显示票价'],
             onlyShowHighSpeedRail: !!config['仅显示高铁']
         },
-        pollinterval: (parseInt(config["监控频率(分钟)"]) || 3) * 60 * 1000,
+        pollinterval: pollInt * 60 * 1000,
         info:{
             from: config["出发站"],
             to: config["到达站"],
@@ -64,7 +67,7 @@ function getConfigs(dir){
         let curPath = path.join(dir,item);
         let stat = fs.statSync(curPath);
         if(stat.isFile() && curPath.match(/(\.json[3,5]?)$/)){
-            console.log(`Watch-json: ${curPath}`);
+            console.log(`Watch-json: ${colors.gray(curPath.replace("\\","/"))}`);
             try{
                 let config = JSON.parse(fs.readFileSync(curPath), 'utf8');
                 config.name = path.basename(curPath);
@@ -89,7 +92,6 @@ function watch(configs,dir){
         console.log("启动失败！");
         return;
     }
-    console.log("");
     configs.forEach((it)=>{
         WTS[it.name] = new Watcher(it);
         WTS[it.name].start();
@@ -109,6 +111,7 @@ function watch(configs,dir){
 module.exports = {
     start: (dir) => {
         dir = dir||"./targets";
+        console.log(`Watch-dir: ${colors.gray(dir.replace("\\","/"))}`);
         watch(getConfigs(dir),dir);
     }
 };
