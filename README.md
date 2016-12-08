@@ -14,7 +14,9 @@ $ git clone git@github.com:Froguard/wt.git
 $ npm link
 ```
 
-### 2. create ```./targets/target1.json``` (or u can create more than one json file)
+### 2. create config file 
+
+create ```./targets/target1.json``` (or u can create more than one json file)
 
 ```json
 {
@@ -40,7 +42,7 @@ $ watch12306 %another_directory_path_u_ve_created%
 
 ### 4. result
 
-> in cli
+> in command line
 
 ![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/demo.png)
 
