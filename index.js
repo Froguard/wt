@@ -2,8 +2,8 @@
 const path = require('path');
 const fs = require('fs');
 const fileExistSync = fs.existsSync || path.existsSync;
+const Type = require('./lib/util/typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
 const STATIONS = require('./lib/station');
-const Type = require('./lib/typeOf');//这里不适用node-util检查，因为官方提示很多isXXX方法会过时
 const Watcher = require('./lib/watcher');
 
 /**
@@ -12,7 +12,9 @@ const Watcher = require('./lib/watcher');
  * @returns {*|string}
  */
 function getKeyByStationName(name){
-    !STATIONS[name||''] && console.log(`无次车站'${name}'`);
+    if(!STATIONS[name||'']){
+        throw new Error(`没有找到名字叫'${name}'的车站！`);
+    }
     return STATIONS[name||''] || name || 'undefined';
 }
 
@@ -61,6 +63,7 @@ function getConfigs(dir){
         let curPath = path.join(dir,item);
         let stat = fs.statSync(curPath);
         if(stat.isFile() && curPath.match(/(\.json[3,5]?)$/)){
+            console.log(`Watch-json: ${curPath}`);
             try{
                 let config = JSON.parse(fs.readFileSync(curPath), 'utf8');
                 config.name = path.basename(curPath);
@@ -80,6 +83,10 @@ let WTS = {};
  * @param configs
  */
 function watch(configs){
+    if(configs.length==0){
+        console.log("启动失败！");
+        return;
+    }
     configs.forEach((it)=>{
         WTS[it.name] = new Watcher(it);
         WTS[it.name].start();
@@ -87,10 +94,10 @@ function watch(configs){
 
 }
 
-watch(getConfigs());
+// watch(getConfigs());
 
-// module.exports = {
-//     start: (dir) => {
-//         watch(getConfigs(dir));
-//     }
-// };
+module.exports = {
+    start: (dir) => {
+        watch(getConfigs(dir));
+    }
+};
