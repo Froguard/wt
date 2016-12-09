@@ -21,6 +21,42 @@ function getKeyByStationName(name){
 }
 
 /**
+ * 转换中文配置中的‘包含票种’字段
+ * @param includeArr
+ * @returns {*}
+ */
+function getInclude(includeArr){
+    let res = {
+        resArr: [],
+        resArrCN: []
+    };
+    if(Type.isArray(includeArr) && includeArr.length > 0){
+        let tkMap = {
+            "商务座": "swz_num",
+            "特等座": "tz_num",
+            "一等座": "zy_num",
+            "二等座": "ze_num",
+            "高铁软卧": "gr_num" ,
+            "软卧": "rw_num",
+            "硬卧": "yw_num",
+            "软座": "rz_num",
+            "硬座": "yz_num",
+            "无座": "wz_num",
+            "其他": "qt_num"
+        };
+        includeArr.forEach(k=>{
+            if(!!tkMap[k]){
+                res.resArr.push(tkMap[k]);
+                res.resArrCN.push(k);
+                delete tkMap[k];//为了去重
+            }
+        });
+    }
+    // console.log(res);
+    return res;
+}
+
+/**
  * 将中文配置转换为配置
  * @param config
  * @returns {Object}
@@ -29,6 +65,7 @@ function cvtConfig(config){
     config = config || {};
     let pollInt = parseInt(config["监控频率(分钟)"]) || 0;
     pollInt = pollInt < 1 ? 1 : pollInt;
+    let includeObj = getInclude(config['包含票种']);
     return {
         name: config.name || "未命名",
         from: getKeyByStationName(config['出发站']),
@@ -37,7 +74,8 @@ function cvtConfig(config){
         condition:{
             purposeCode: config['成人票'] ? 'ADULT' : '0X00',
             showPrice: !!config['显示票价'],
-            onlyShowHighSpeedRail: !!config['仅显示高铁']
+            onlyShowHighSpeedRail: !!config['仅显示高铁'],
+            include: includeObj.resArr
         },
         pollinterval: pollInt * 60 * 1000,
         info:{
@@ -45,7 +83,8 @@ function cvtConfig(config){
             to: config["到达站"],
             date: config['出发时间'],
             purposeCode: config['成人票'] ? '成人票' : '学生票',
-            onlyShowHighSpeedRail: config['仅显示高铁']?"高铁":"普通"
+            onlyShowHighSpeedRail: config['仅显示高铁']?"高铁":"普通",
+            include: includeObj.resArrCN
         }
     };
 }
@@ -115,8 +154,6 @@ function watch(configs,dir){
 
 }
 
-// watch(getConfigs());
-
 module.exports = {
     start: (dir) => {
         dir = dir||"./targets";
@@ -124,3 +161,5 @@ module.exports = {
         watch(getConfigs(dir),dir);
     }
 };
+
+// watch(getConfigs());
