@@ -18,6 +18,10 @@ $ git clone git@github.com:Froguard/wt.git
 ### 1. 安装
 
 ```bash
+$ npm install
+```
+
+```bash
 $ npm link
 ```
 
