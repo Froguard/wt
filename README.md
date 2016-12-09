@@ -6,6 +6,7 @@
 - 配置文件被更改的时候**自动刷新**
 - 仅仅是 ```监视```+```通知```的功能，不能使用它订票
 
+
 ## 使用
 
 ### 0. 下载
@@ -58,3 +59,9 @@ $ watch12306 %another_directory_path_u_ve_created%
 > 桌面
 
 ![cmd](https://raw.githubusercontent.com/Froguard/wt/master/img/tip.png)
+
+
+### 注意事项
+
+- node版本>4.0.0
+- 气泡弹窗，如果想要好看一点，建议windows用户请安装Growl程序，当然，不安装也是可以的
