@@ -100,7 +100,16 @@ function watch(configs,dir){
         this.on('all', function(event, filepath) {
             let target = path.basename(filepath);
             // console.log(`${target} is ${event}`);
-            WTS[target].restart();
+            try{
+                let newConfig = JSON.parse(fs.readFileSync(filepath), 'utf8');
+                try{
+                    WTS[target].restart(cvtConfig(newConfig));
+                }catch(e2){
+                    console.error(`重启监视器'${target}'失败!配置的json文件有问题\r\n:`,e2);
+                }
+            }catch(e1){
+                console.error(`获取配置'${target}'失败!配置的json文件有问题\r\n:`,e1);
+            }
         });
     });
 
