@@ -23,7 +23,7 @@ $ npm link
 
 ### 2. 创建配置文件 
 
-如 ```./targets/target1.json``` （可以创建多个json文件）
+如 ```./targets/target1.json``` （可以创建多个*.json文件，名字随意，字段固定如下）
 
 ```json
 {
