@@ -1,8 +1,8 @@
 {
   "name": "watch12306",
   "author": "Froguard",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.7",
+  "description": "检测12306网站，并在有余票时候通知",
   "main": "./index.js",
   "bin": {
     "watch12306": "./bin/bin.js"
@@ -17,6 +17,7 @@
 	"监测",
 	"此插件没法抢票，只能检测，当有票时候进行通知"
   ],
+  "homepage": "https://github.com/Froguard/wt#readme",
   "dependencies": {
     "co": "^4.6.0",
     "columnify": "^1.5.4",
