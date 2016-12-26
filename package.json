@@ -1,7 +1,7 @@
 {
   "name": "watch12306",
   "author": "Froguard",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "检测12306网站，并在有余票时候通知",
   "main": "./index.js",
   "bin": {
